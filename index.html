@@ -17,6 +17,7 @@
     <div id="sidebar">
         <p id="prompt">Click a store to view more information.</p>
         <h2 id="store-name"></h2>
+        <ul id="inspection-list"></ul>
     </div>
 
     <div id="map"></div>
@@ -40,8 +41,23 @@
                     const marker = L.marker([coords[1], coords[0]]).addTo(map);
                 
                     marker.on('click', () => {
+                        //show store name on sidebar
                         document.getElementById('prompt').style.display = 'none';
                         document.getElementById('store-name').textContent = store.store_name;
+
+                        //call API to get list of inspections
+                        fetch(`https://bwm.dravenbc.com/store_inspections?store_id=${store.store_id}`)
+                            .then(response => response.json())
+                            .then(inspections => {
+                                const list = document.getElementById('inspection-list');
+                                list.innerHTML = '';
+
+                                inspections.forEach(inspection => {
+                                    const li = document.createElement('li');
+                                    li.textContent = `${inspection.date} — ${inspection.device_group} — ${inspection.result}`;
+                                    list.appendChild(li);
+                                });
+                            });
                     })
                 });
             });
