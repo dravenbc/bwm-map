@@ -27,7 +27,7 @@
                 data.forEach(store => {
                     const geom = JSON.parse(store.geom);
                     const coords = geom.coordinates;
-                    L.circleMarker([coords[1], coords[0]]).addTo(map);
+                    L.marker([coords[1], coords[0]]).addTo(map);
                 });
             });
     </script>
