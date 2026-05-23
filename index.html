@@ -5,12 +5,22 @@
     <title>Weights and Measures Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <style>
-        body { margin: 0; }
-        #map { height: 100vh; }
+        body { margin: 0; display: flex; height: 100vh;}
+        #sidebar { flex: 1; height: 100%; padding: 1rem; }
+        #map { flex: 2; height: 100%}
+        
     </style>
 </head>
 <body>
+    
+
+    <div id="sidebar">
+        <p id="prompt">Click a store to view more information.</p>
+        <h2 id="store-name"></h2>
+    </div>
+
     <div id="map"></div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
 
@@ -27,7 +37,12 @@
                 data.forEach(store => {
                     const geom = JSON.parse(store.geom);
                     const coords = geom.coordinates;
-                    L.marker([coords[1], coords[0]]).addTo(map);
+                    const marker = L.marker([coords[1], coords[0]]).addTo(map);
+                
+                    marker.on('click', () => {
+                        document.getElementById('prompt').style.display = 'none';
+                        document.getElementById('store-name').textContent = store.store_name;
+                    })
                 });
             });
     </script>
