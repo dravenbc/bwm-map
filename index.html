@@ -5,22 +5,30 @@
     <title>Weights and Measures Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <style>
-        body { margin: 0; display: flex; height: 100vh;}
+        #header { text-align: center; height: 10vh; }
+        body { margin: 0; display: flex; flex-direction: column;   height: 100vh;}
+        #content { display: flex; flex: 1; }
         #sidebar { flex: 1; height: 100%; padding: 1rem; overflow-y: auto;}
         #map { flex: 2; height: 100%}
         
     </style>
 </head>
 <body>
-    
-
-    <div id="sidebar">
-        <p id="prompt">Click a store to view more information.</p>
-        <h2 id="store-name"></h2>
-        <ul id="inspection-list"></ul>
+    <div id = "header">
+        <h1>Allegheny County, PA Weights and Measures Inspections</h1>
     </div>
 
-    <div id="map"></div>
+    <div id = content>
+
+        <div id="sidebar">
+            <p id="prompt">Click a store to view more information.</p>
+            <h2 id="store-name"></h2>
+            <ul id="inspection-list"></ul>
+        </div>
+
+        <div id="map"></div>
+
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
